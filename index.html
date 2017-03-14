@@ -20,12 +20,12 @@
         <section class="">
             <button type="button" name="SanDiegoButton" ng-click="weatherCtrl.setSanDiegoWeather()">San Diego</button>
             <button type="button" name="NewYorkButton" ng-click="weatherCtrl.setNewYorkWeather()">New York</button>
-            <button type="button" name="WashingtonDCButton">Washington D. C.</button>
-            <button type="button" name="LondonButton">London</button>
-            <button type="button" name="TokyoButton">Tokyo</button>
+            <button type="button" name="WashingtonDCButton" ng-click="weatherCtrl.setWashingtonDCWeather()">Washington D. C.</button>
+            <button type="button" name="LondonButton" ng-click="weatherCtrl.setLondonWeather()">London</button>
+            <button type="button" name="TokyoButton" ng-click="weatherCtrl.setTokyoWeather()">Tokyo</button>
 
-            <input type="text" name="citySearchInput" value="Search..."></input>
-            <button type="submit" name="searchButton">Go</button>
+            <input type="text" name="citySearchInput" value="Search..." ng-model="weatherCtrl.cityInput"></input>
+            <button type="submit" name="searchButton" ng-click="weatherCtrl.searchCity()">Go</button>
         </section>
 
         <hr>
@@ -72,7 +72,7 @@
                 <h4>Search History</h4>
                 <table class="table">
                     <tr ng-repeat="history in weatherCtrl.locationsHistory">
-                        <td>{{$index+1}}</td>
+                        <!-- <td>{{$index+1}}</td> -->
                         <td>{{history.name}}</td>
                         <td>{{history.date}}</td>
                         <td>{{history.time}}</td>

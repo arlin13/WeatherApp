@@ -5,41 +5,21 @@ function WeatherController($http) {
     var vm = this;
     vm.APIKey = 'a604dac39694bb758668989e417c4580';
     vm.location;
+    vm.cityInput;
     vm.currentLocation;
-    vm.locationsHistory = [{
-            name: 'Tijuana',
-            date: 'date',
-            time: 'time:00'
-        },
-        {
-            name: 'Tijuana',
-            date: 'date',
-            time: 'time:00'
-        },
-        {
-            name: 'Tijuana',
-            date: 'date',
-            time: 'time:00'
-        },
-        {
-            name: 'Tijuana',
-            date: 'date',
-            time: 'time:00'
-        },
-        {
-            name: 'Tijuana',
-            date: 'date',
-            time: 'time:00'
-        }
-    ];
+    vm.locationsHistory = [];
 
     vm.APICall = function APICall(city) {
         $http({
             method: 'GET',
-            url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city +
-                '&appid=' + vm.APIKey
+            url: 'http://api.openweathermap.org/data/2.5/weather?q='
+            + city
+            + '&units=imperial&appid='
+            + vm.APIKey
         }).then(function successCallback(response) {
             vm.currentLocation = response.data;
+            vm.locationsHistory.unshift(vm.currentLocation);
+            console.log(vm.currentLocation);
         }, function errorCallback(response) {
             console.log("Something was wrong");
         });
@@ -59,6 +39,11 @@ function WeatherController($http) {
     }
     vm.setTokyoWeather = function() {
         vm.APICall('Tokyo');
+    }
+
+    vm.searchCity = function() {
+        vm.APICall(vm.cityInput);
+        vm.cityInput = '';
     }
 }
 
