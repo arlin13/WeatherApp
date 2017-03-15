@@ -19,7 +19,6 @@ function WeatherController($http) {
         }).then(function successCallback(response) {
             vm.currentLocation = response.data;
             vm.locationsHistory.unshift(vm.currentLocation);
-            console.log(vm.currentLocation);
         }, function errorCallback(response) {
             console.log("Something was wrong");
         });

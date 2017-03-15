@@ -9,7 +9,10 @@
 <body ng-controller="WeatherController as weatherCtrl">
     <div id="container" class="">
         <!-- 1. Header -->
-        <header class="">
+        <header class="row">
+          <div class="col-md-2">
+            <img src="Images/weather.png" alt="">
+          </div>
             <h1>Origin Weather Application</h1>
             <h5>Always know if you'll need an umbrella!</h5>
         </header>
@@ -18,14 +21,18 @@
 
         <!-- 2. Search bar -->
         <section class="">
-            <button type="button" name="SanDiegoButton" ng-click="weatherCtrl.setSanDiegoWeather()">San Diego</button>
-            <button type="button" name="NewYorkButton" ng-click="weatherCtrl.setNewYorkWeather()">New York</button>
-            <button type="button" name="WashingtonDCButton" ng-click="weatherCtrl.setWashingtonDCWeather()">Washington D. C.</button>
-            <button type="button" name="LondonButton" ng-click="weatherCtrl.setLondonWeather()">London</button>
-            <button type="button" name="TokyoButton" ng-click="weatherCtrl.setTokyoWeather()">Tokyo</button>
-
-            <input type="text" name="citySearchInput" value="Search..." ng-model="weatherCtrl.cityInput"></input>
-            <button type="submit" name="searchButton" ng-click="weatherCtrl.searchCity()">Go</button>
+            <button type="button" class="btn btn-primary" name="SanDiegoButton" ng-click="weatherCtrl.setSanDiegoWeather()">San Diego</button>
+            <button type="button" class="btn btn-primary" name="NewYorkButton" ng-click="weatherCtrl.setNewYorkWeather()">New York</button>
+            <button type="button" class="btn btn-primary" name="WashingtonDCButton" ng-click="weatherCtrl.setWashingtonDCWeather()">Washington D. C.</button>
+            <button type="button" class="btn btn-primary" name="LondonButton" ng-click="weatherCtrl.setLondonWeather()">London</button>
+            <button type="button" class="btn btn-primary" name="TokyoButton" ng-click="weatherCtrl.setTokyoWeather()">Tokyo</button>
+            <br><br>
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="citySearchInput" value="Search..." ng-model="weatherCtrl.cityInput"></input>
+                </div>
+                <button type="submit" class="btn btn-default col-md-1" name="searchButton" ng-click="weatherCtrl.searchCity()">Go</button>
+            </div>
         </section>
 
         <hr>
@@ -33,17 +40,17 @@
         <!-- 3. City information div and Search history are divs placed on the same row, so created a parent div for both of them -->
         <section class="row">
             <!-- 4. City Information -->
-            <div class="col-md-6">
+            <div class="col-md-6 border" ng-hide="weatherCtrl.locationsHistory.length==0">
                 <h4>City Information</h4>
-                <div class="">
+                <div class="center">
                     <!-- Header -->
                     <h3>{{weatherCtrl.currentLocation.name}}</h3>
                     <p>Lat/Long: {{weatherCtrl.currentLocation.coord.lat}},{{weatherCtrl.currentLocation.coord.lon}}</p>
                 </div>
                 <hr>
                 <div class="col-md-4">
-                    <label>Temperature (F)</label>
-                    <p>{{weatherCtrl.currentLocation.main.temp}}</p>
+                    <label>Temperature</label>
+                    <p>{{weatherCtrl.currentLocation.main.temp}}F</p>
                 </div>
                 <div class="col-md-4">
                     <label>Pressure</label>
@@ -51,24 +58,24 @@
                 </div>
                 <div class="col-md-4">
                     <label>Humidity</label>
-                    <p>{{weatherCtrl.currentLocation.main.humidity}}</p>
+                    <p>{{weatherCtrl.currentLocation.main.humidity}}%</p>
                 </div>
                 <div class="col-md-4">
-                    <label>Lowest Temperature (F)</label>
-                    <p>{{weatherCtrl.currentLocation.main.temp_min}}</p>
+                    <label>Lowest Temperature</label>
+                    <p>{{weatherCtrl.currentLocation.main.temp_min}}F</p>
                 </div>
                 <div class="col-md-4">
-                    <label>Highest Temperature (F)</label>
-                    <p>{{weatherCtrl.currentLocation.main.temp_max}}</p>
+                    <label>Highest Temperature</label>
+                    <p>{{weatherCtrl.currentLocation.main.temp_max}}F</p>
                 </div>
                 <div class="col-md-4">
                     <label>Wind Speed</label>
-                    <p>{{weatherCtrl.currentLocation.wind.speed}}</p>
+                    <p>{{weatherCtrl.currentLocation.wind.speed}}mph</p>
                 </div>
             </div>
 
             <!-- 5. Search History -->
-            <div class="col-md-6">
+            <div class="col-md-6 border" ng-hide="weatherCtrl.locationsHistory.length==0">
                 <h4>Search History</h4>
                 <table class="table">
                     <tr ng-repeat="history in weatherCtrl.locationsHistory">
@@ -78,6 +85,15 @@
                         <td>{{history.time}}</td>
                     </tr>
                 </table>
+            </div>
+
+            <!-- Default div -->
+            <div class="" id="defaultDiv" ng-show="weatherCtrl.locationsHistory.length==0">
+                <br>
+                <h2>See the weather of one city of the buttons,</h2>
+                <br>
+                <h3>or try searching any other city of the world!</h3>
+                <br>
             </div>
         </section>
     </div>
